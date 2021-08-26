@@ -1,11 +1,12 @@
 <template>
     <div class="keyboard">
-       <PianoKey v-for="note in notes" :key="note"  @click="playNote(note)" :keyText="note"/>
+       <PianoKey v-for="keyNote in keyNotes" :key="keyNote.note"  @click="playNote(keyNote.note)" :keyText="keyNote.note"/>
     </div>
 </template>
 
 <script>
 import PianoKey from './PianoKey.vue'
+import KeyNote from '../model/KeyNote'
 import * as Tone from 'tone'
 
 export default {
@@ -14,12 +15,27 @@ export default {
     PianoKey
   },
   data(){
-    return { notes:['C4','D4','E4','F4','G4','A4','B4']}
+    return { keyNotes:[ new KeyNote('C4','A'),
+                        new KeyNote('D4','S'),
+                        new KeyNote('E4','D'),
+                        new KeyNote('F4','F'),
+                        new KeyNote('G4','G'),
+                        new KeyNote('A4','H'),
+                        new KeyNote('B4','J'),
+                  ]}
   },
   methods:{
     playNote: async function (note){
         await Tone.start();
         this.sampler.triggerAttackRelease(note);
+    },
+    keyboardPress: async function(event){
+      
+      let key = String.fromCharCode(event.keyCode).toUpperCase();
+      const keynote = this.keyNotes.find(ele => ele.key == key);
+      if(keynote){
+        await this.playNote(keynote.note);
+      }
     }
   },
   created(){
@@ -30,6 +46,11 @@ export default {
         },
       release: 1,
     }).toDestination();
+
+    window.addEventListener('keypress', this.keyboardPress);
+  },
+  unmounted(){
+    window.removeEventListener('keypress', this.keyboardPress);
   }
 }
 
