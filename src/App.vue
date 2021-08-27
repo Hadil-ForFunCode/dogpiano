@@ -1,7 +1,8 @@
 <template>
-  <Piano />
+  <Piano />    
+
   <div>
-    <p>Baseado no improv code do <a href="https://www.twitch.tv/codinggarden">Coding Garden</a> video <a href="https://www.twitch.tv/videos/1124214913">aqui</a></p>
+    <p v-html="$t('basedOn')"></p>    
     </div>
 </template>
 
