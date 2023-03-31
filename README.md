@@ -1,7 +1,7 @@
 # dogpiano
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/Hadil-ForFunCode/dogpiano/blob/master/README.en.md)
 
-Teclado com sons de latidos de cachorros !
+Teclado com sons de latidos de cachorros ! :D
 
 Projeto completo em [Piano da Nala](https://nala-piano.herokuapp.com/)
 
